@@ -12,7 +12,7 @@ namespace tracklogger.Controllers.API
     {
         private TrackPointsContext tc = new TrackPointsContext();
 
-        public HttpResponseMessage Get(decimal lat, decimal lng, decimal ele, decimal crs, decimal spd, int sat)
+        public HttpResponseMessage Get(float lat, float lng, float ele, float crs, float spd, int sat)
         {
             TrackPoint t = new TrackPoint();
             t.Lat = lat;

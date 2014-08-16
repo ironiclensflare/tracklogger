@@ -9,12 +9,12 @@ namespace tracklogger.Models
     public class TrackPoint
     {
         public int TrackPointID { get; set; }
-        public decimal Lat { get; set; }
-        public decimal Lng { get; set; }
+        public float Lat { get; set; }
+        public float Lng { get; set; }
         public int Satellites { get; set; }
-        public decimal Elevation { get; set; }
-        public decimal Course { get; set; }
-        public decimal Speed { get; set; }
+        public float Elevation { get; set; }
+        public float Course { get; set; }
+        public float Speed { get; set; }
         public DateTime Time { get; set; }
     }
 
