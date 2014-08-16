@@ -4,7 +4,7 @@
     @map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions)
 
 getTrackData = ->
-    url = location.href + 'api/track'
+    url = location.href + '/api/track'
     $.getJSON url, (trackData) ->
         createPolyLine(trackData)
         lat = trackData[0].Lat
