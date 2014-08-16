@@ -1,24 +1,33 @@
 ﻿initializeMap = ->
     mapOptions =
-        center: new google.maps.LatLng(51.5702629, -1.1495688)
-        zoom: 14
-    
-    @map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions)
+        zoom: 16
+    @map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions)
 
 getTrackData = ->
-    $.getJSON "/api/track/", (trackData) ->
-        createMapPoint(t) for t in trackData
+    url = location.href + 'api/track'
+    $.getJSON url, (trackData) ->
+        createPolyLine(trackData)
+        lat = trackData[0].Lat
+        lng = trackData[0].Lng
+        centerPoint = new google.maps.LatLng(lat, lng)
+        map.setCenter(centerPoint)
 
-createMapPoint = (point) ->
+createPolyLine = (trackData) ->
+    @polyLineCoords = []
+    addPolyLinePoint(t) for t in trackData
+    polyLine = new google.maps.Polyline
+        path: polyLineCoords
+        geodesic: true
+        strokeColor: '#0000FF'
+        strokeOpacity: 1.0
+        strokeWeight: 2
+    polyLine.setMap(map)
+
+addPolyLinePoint = (point) ->
     lat = point.Lat
     lng = point.Lng
-    name = point.Time
-    
-    marker = new google.maps.Marker
-        position: new google.maps.LatLng(lat, lng)
-        title: name
-
-    marker.setMap(map)
+    coordinates =  new google.maps.LatLng(lat, lng)
+    polyLineCoords.push(coordinates)
 
 $(document).ready ->
     initializeMap()
