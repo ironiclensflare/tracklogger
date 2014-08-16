@@ -28,5 +28,13 @@ namespace tracklogger.Controllers.API
             
             return new HttpResponseMessage(HttpStatusCode.Created);
         }
+
+        public IQueryable<TrackPoint> Get()
+        {
+            DateTime today = DateTime.Now.Date;
+            return tc.TrackPoints
+                .Where(t => t.Time >= today)
+                .OrderByDescending(t => t.TrackPointID);
+        }
     }
 }

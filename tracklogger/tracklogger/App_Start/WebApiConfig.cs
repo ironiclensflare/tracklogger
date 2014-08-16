@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Net.Http.Headers;
 
 namespace tracklogger
 {
@@ -12,6 +13,8 @@ namespace tracklogger
             // Web API configuration and services
 
             // Web API routes
+            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
+            
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
